@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="myViewModel"
+            type="com.demo.shortnote.viewmodel.NoteViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="Note Title"
+            android:layout_margin="6dp"
+            android:text="@={myViewModel.inputTitle}"/>
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etDetails"
+            android:layout_marginTop="6dp"
+            android:layout_below="@+id/etTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:hint="Note Details"
+            android:lines="3"
+            android:layout_margin="6dp"
+            android:text="@={myViewModel.inputDetails}"/>
+
+        <RelativeLayout
+            android:id="@+id/rlButtonContainer"
+            android:layout_below="@+id/etDetails"
+            android:layout_marginTop="6dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDeleteAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@={myViewModel.deleteAllButtonText}"
+                android:layout_marginLeft="6dp"
+                android:onClick="@{()->myViewModel.clearAllOrDelete()}"
+                android:layout_toLeftOf="@+id/btnSaveOrUpdate"
+                android:layout_marginRight="6dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSaveOrUpdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@={myViewModel.saveOrUpdateButtonText}"
+                android:layout_alignParentRight="true"
+                android:onClick="@{()->myViewModel.saveOrUpdate()}"/>
+
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_below="@+id/rlButtonContainer"
+            android:layout_margin="6dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+    </RelativeLayout>
+
+</layout>
